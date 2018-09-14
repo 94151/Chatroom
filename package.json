@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@pusher/chatkit": "0.7.17"
+  }
+}
