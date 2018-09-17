@@ -53,6 +53,110 @@
         .catch(error => {
           console.error("error:", error);
         });
+
+         currentUser.createRoom({
+        name: 'general',
+        private: true,
+        addUserIds: ['craig', 'kate']
+      }).then(room => {
+        console.log(`Created room called ${room.name}`)
+      })
+      .catch(err => {
+        console.log(`Error creating room ${err}`)
+      })
+
+      currentUser.fetchMessages({
+        roomId: someRoomId,
+        initialId: 42,
+        direction: 'older',
+        limit: 10,
+      })
+        .then(messages => {
+          // do something with the messages
+        })
+        .catch(err => {
+          console.log(`Error fetching messages: ${err}`)
+        })
+
+        // add a user to a room
+
+        currentUser.addUserToRoom({
+        userId: 'keith',
+        roomId: 123
+        })
+        .then(() => {
+          console.log('Added keith to room 123')
+        }),
+        .catch(err => {
+          console.log(`Error adding keith to room 123: ${err}`)
+        })
+
+        // remove a user from the room
+
+        currentUser.removeUserFromRoom({
+          userId: 'leah',
+          roomId: 123
+        })
+          .then(() => {
+            console.log('Removed leah from room 123')
+          })
+          .catch(err => {
+            console.log(`Error removing leah from room 123: ${err}`)
+          })
+
+        // get joinable rooms
+        
+        currentUser.getJoinableRooms()
+        .then(rooms => {
+          // do something with the rooms
+        })
+        .catch(err => {
+          console.log(`Error getting joinable rooms: ${err}`)
+        })  
+
+        // Join a room
+
+        currentUser.joinRoom({ roomId: someRoomID })
+          .then(room => {
+            console.log(`Joined room with ID: ${room.id}`)
+          })
+          .catch(err => {
+            console.log(`Error joining room ${someRoomID}: ${err}`)
+          })
+
+        //leave a room
+        
+        currentUser.leaveRoom({ roomId: someRoomID })
+        .then(room => {
+          console.log(`Left room with ID: ${room.id}`)
+        })
+        .catch(err => {
+          console.log(`Error leaving room ${someRoomID}: ${err}`)
+        })  
+
+        // Update a room
+
+        currentUser.updateRoom({
+        roomId: someRoomID,
+        name: 'Some updated name',
+        private: false
+      })
+        .then(() => {
+          console.log(`Updated room with ID: ${someRoomID}`)
+        })
+        .catch(err => {
+          console.log(`Error updated room ${someRoomID}: ${err}`)
+        })
+
+        // Delete a room
+        
+        currentUser.deleteRoom({ roomId: someRoomID })
+        .then(() => {
+          console.log(`Deleted room with ID: ${someRoomID}`)
+        })
+        .catch(err => {
+          console.log(`Error deleted room ${someRoomID}: ${err}`)
+        }) 
     </script>
   </body>
 </html>
